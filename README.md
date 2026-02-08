@@ -18,6 +18,7 @@ A modern, responsive portfolio website built with React and TypeScript, showcasi
 - [Deployment](#-deployment)
 - [Design](#-design)
 - [Customization](#-customization)
+- [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Contact](#-contact)
@@ -190,17 +191,15 @@ Patrick-Vuong-Portfolio/
 
 ### GitHub Pages
 
-This project includes a deployment workflow configuration in `src/workflows/deploy.yml`.
+This project includes an example GitHub Actions workflow template in `src/workflows/deploy.yml`. It is not active by default and requires manual setup.
 
 **⚠️ Important Setup Notes:**
-1. The workflow file needs to be moved from `src/workflows/deploy.yml` to `.github/workflows/deploy.yml` to function
-2. The workflow currently expects build output in `./dist`, but the vite.config.ts is configured to output to `./build`. You need to either:
-   - Update `vite.config.ts` to use `outDir: 'dist'`, OR
-   - Update the workflow file to use `path: ./build`
+1. The workflow file needs to be moved from `src/workflows/deploy.yml` to `.github/workflows/deploy.yml` to function.
+2. The workflow's publish/build directory must match the Vite build output directory configured in `vite.config.ts` (currently `outDir: 'build'`). Update either the Vite config or the workflow so these values are consistent.
 
 **Setting up GitHub Pages Deployment:**
 1. Move the workflow file: `mkdir -p .github/workflows && mv src/workflows/deploy.yml .github/workflows/`
-2. Fix the build output path mismatch (see note above)
+2. Ensure the workflow's publish/build directory matches the `outDir` in `vite.config.ts` (see note above).
 3. Go to repository Settings → Pages
 4. Set Source to "GitHub Actions"
 5. Push to the `main` branch to trigger deployment
