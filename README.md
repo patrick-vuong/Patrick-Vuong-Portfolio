@@ -99,6 +99,8 @@ Before you begin, ensure you have the following installed:
    yarn install
    ```
 
+   > **Note:** After installation, `node_modules/` and `build/` directories are automatically ignored by git through the `.gitignore` file. These directories should never be committed to the repository. If you see them being staged, refer to the [Troubleshooting](#-troubleshooting) section.
+
 ## 💻 Usage
 
 ### Development Server
@@ -251,6 +253,50 @@ The project includes theme switching capability via `next-themes`. Implement lig
 1. Adding a theme toggle component
 2. Configuring theme colors in your CSS
 3. Using theme-aware classes in components
+
+## 🐛 Troubleshooting
+
+### Node Modules Being Staged in Git
+
+If you encounter node_modules or build artifacts being staged when running the app:
+
+1. **Verify .gitignore is working:**
+   ```bash
+   git check-ignore -v node_modules/
+   git check-ignore -v build/
+   ```
+   
+2. **If files were previously committed, remove them from git tracking:**
+   ```bash
+   # Remove node_modules from git (keeps local files)
+   git rm -r --cached node_modules
+   
+   # Remove build directory from git (keeps local files)
+   git rm -r --cached build
+   
+   # Commit the changes
+   git commit -m "Remove tracked node_modules and build directory"
+   ```
+
+3. **Verify your .gitignore includes:**
+   ```
+   node_modules/
+   build/
+   dist/
+   ```
+
+4. **Clear git cache if issues persist:**
+   ```bash
+   git rm -r --cached .
+   git add .
+   git commit -m "Reset git cache to apply .gitignore"
+   ```
+
+### Build Issues
+
+- Ensure Node.js version 20.x or higher is installed
+- Delete `node_modules` and `package-lock.json`, then run `npm install` again
+- Clear Vite cache: `rm -rf node_modules/.vite`
 
 ## 🤝 Contributing
 
