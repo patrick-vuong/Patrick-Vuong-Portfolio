@@ -119,7 +119,7 @@ Build the application for production:
 npm run build
 ```
 
-The optimized production build will be created in the `build` directory.
+The optimized production build will be created in the `build` directory (as configured in `vite.config.ts`).
 
 ### Preview Production Build
 
@@ -188,32 +188,32 @@ Patrick-Vuong-Portfolio/
 
 ### GitHub Pages
 
-This project is configured to deploy to GitHub Pages automatically. The deployment workflow is located in `src/workflows/deploy.yml`.
+This project includes a deployment workflow configuration in `src/workflows/deploy.yml`.
 
-**Automatic Deployment:**
+**⚠️ Important Setup Notes:**
+1. The workflow file needs to be moved from `src/workflows/deploy.yml` to `.github/workflows/deploy.yml` to function
+2. The workflow currently expects build output in `./dist`, but the vite.config.ts is configured to output to `./build`. You need to either:
+   - Update `vite.config.ts` to use `outDir: 'dist'`, OR
+   - Update the workflow file to use `path: ./build`
+
+**Setting up GitHub Pages Deployment:**
+1. Move the workflow file: `mkdir -p .github/workflows && mv src/workflows/deploy.yml .github/workflows/`
+2. Fix the build output path mismatch (see note above)
+3. Go to repository Settings → Pages
+4. Set Source to "GitHub Actions"
+5. Push to the `main` branch to trigger deployment
+
+**Once configured, deployment is automatic:**
 - Push to the `main` branch triggers automatic deployment
 - Manually trigger deployment using GitHub Actions workflow dispatch
 
-**Deployment Process:**
-1. Code is checked out
-2. Node.js 20 is set up
-3. Dependencies are installed
-4. Production build is created
-5. Build artifacts are uploaded
-6. Site is deployed to GitHub Pages
-
-**Note:** To enable GitHub Pages deployment:
-1. Go to repository Settings → Pages
-2. Set Source to "GitHub Actions"
-3. Ensure the workflow file is in `.github/workflows/` directory (you may need to move it from `src/workflows/`)
-
 ### Other Platforms
 
-The production build can be deployed to any static hosting service:
+The production build (in the `build` folder) can be deployed to any static hosting service:
 
-- **Netlify**: Drag and drop the `build` folder or connect your repository
-- **Vercel**: Import your repository and it will auto-detect Vite
-- **Cloudflare Pages**: Connect your repository or use Wrangler CLI
+- **Netlify**: Drag and drop the `build` folder or connect your repository (set build command to `npm run build` and publish directory to `build`)
+- **Vercel**: Import your repository and it will auto-detect Vite (set output directory to `build`)
+- **Cloudflare Pages**: Connect your repository or use Wrangler CLI (build command: `npm run build`, output: `build`)
 - **AWS S3 + CloudFront**: Upload the `build` folder to S3 and serve via CloudFront
 
 ## 🎨 Design
