@@ -78,8 +78,8 @@ export function About() {
 
               <div className="pt-6">
                 <a
-                  href="/Patrick-Vuong-Resume.pdf"
-                  download
+                  href={`${import.meta.env.BASE_URL}Patrick-Vuong-Resume.pdf`}
+                  download="Patrick-Vuong-Resume.pdf"
                   className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   <FileText size={20} />
