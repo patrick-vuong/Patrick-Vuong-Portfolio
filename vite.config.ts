@@ -5,9 +5,6 @@
 
   export default defineConfig({
     base: '/Patrick-Vuong-Portfolio/',
-    build: {
-      outDir: 'dist',
-    },
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -65,7 +62,7 @@
     },
     build: {
       target: 'esnext',
-      outDir: 'build',
+      outDir: 'dist',
     },
     server: {
       port: 3000,
