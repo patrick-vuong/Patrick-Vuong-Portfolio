@@ -4,6 +4,10 @@
   import path from 'path';
 
   export default defineConfig({
+    base: '/Patrick-Vuong-Portfolio/',
+    build: {
+      outDir: 'dist',
+    },
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
